@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <thread>
+#include "Utils.hpp"
 
 namespace CLog
 {
@@ -29,8 +30,8 @@ namespace CLog
     class Logger
     {
     public:
-        Logger(LogLevel minimumLogLevel = LogLevel::Info)
-            : m_MinimumLogLevel(minimumLogLevel)
+        Logger(std::string format, LogLevel minimumLogLevel = LogLevel::Info)
+            : m_MinimumLogLevel(minimumLogLevel), m_Format(format)
         {
             m_Thread = std::thread([this]()
                                    { this->sinkLoop(); });
@@ -48,24 +49,10 @@ namespace CLog
             if (level < m_MinimumLogLevel)
                 return;
 
-            std::string prefix;
-            switch (level)
-            {
-            case LogLevel::Info:
-                prefix = "[INF]";
-                break;
-            case LogLevel::Debug:
-                prefix = "[DBG]";
-                break;
-            case LogLevel::Warn:
-                prefix = "[WRN]";
-                break;
-            case LogLevel::Error:
-                prefix = "[ERR]";
-                break;
-            }
+            std::string mutString = m_Format;
+            Utils::ReplaceAllInString(mutString, "{MESSAGE}", message);
 
-            std::string messageToLog = prefix + " " + message + "\n";
+            std::string messageToLog = mutString + "\n";
             m_MessageBuffer.emplace_back(CLog::LogMessage(messageToLog, level));
         }
 
@@ -91,6 +78,7 @@ namespace CLog
         LogLevel m_MinimumLogLevel;
         std::vector<CLog::LogMessage> m_MessageBuffer;
         std::thread m_Thread;
+        std::string m_Format;
 
         void sinkBuffer()
         {
@@ -99,8 +87,24 @@ namespace CLog
 
             for (CLog::LogMessage &message : m_MessageBuffer)
             {
-                std::string colorCode = "0";
+                std::string prefix = "";
+                switch (message.Level)
+                {
+                case LogLevel::Info:
+                    prefix = "INFO";
+                    break;
+                case LogLevel::Debug:
+                    prefix = "DEBUG";
+                    break;
+                case LogLevel::Warn:
+                    prefix = "WARNING";
+                    break;
+                case LogLevel::Error:
+                    prefix = "ERROR";
+                    break;
+                }
 
+                std::string colorCode = "0";
                 switch (message.Level)
                 {
                 case LogLevel::Info:
@@ -117,7 +121,10 @@ namespace CLog
                     break;
                 }
 
-                std::cout << "\033[" << colorCode << "m" << message.Text << "\033[0m";
+                Utils::ReplaceAllInString(message.Text, "{PREFIX}", prefix);
+                Utils::ReplaceAllInString(message.Text, "{COLOR_START}", "\033[" + colorCode + "m");
+                Utils::ReplaceAllInString(message.Text, "{COLOR_END}", "\033[0m");
+                std::cout << message.Text;
             }
 
             std::cout << std::endl;

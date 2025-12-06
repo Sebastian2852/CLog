@@ -2,8 +2,8 @@
 
 int main()
 {
-    CLog::Logger myLogger;
-    myLogger.Info("Hello World!");
+    CLog::Logger myLogger("{COLOR_START}[{PREFIX}] {MESSAGE}{COLOR_END}");
+    myLogger.Info("{PREFIX} Hello World!");
     myLogger.Debug("Hello World!");
     myLogger.Warn("Hello World!");
     myLogger.Error("Hello World!");
