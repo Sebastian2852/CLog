@@ -28,7 +28,7 @@ namespace CLog
         ~Logger()
         {
             m_Running = false;
-			if (m_Thread.joinable())
+            if (m_Thread.joinable())
                 m_Thread.join();
         }
 
