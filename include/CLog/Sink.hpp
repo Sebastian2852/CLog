@@ -38,7 +38,7 @@ namespace CLog
         public:
             FileSink(const std::string &filename)
             {
-                m_File = std::ofstream(filename, std::ios::app);
+                m_File = std::ofstream(filename, std::ios::out);
             }
 
             ~FileSink()
