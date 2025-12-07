@@ -14,13 +14,13 @@ namespace CLog
         {
         public:
             virtual ~BaseSink() = default;
-            virtual void log(const LogMessage &message) = 0;
+            virtual void Log(const LogMessage &message) = 0;
         };
 
         class ConsoleSink : public BaseSink
         {
         public:
-            void log(const LogMessage &message) override
+            void Log(const LogMessage &message) override
             {
                 std::string prefix = Utils::GetPrefixForLevel(message.Level);
                 std::string colorCode = Utils::GetColorCodeForLevel(message.Level);
@@ -46,7 +46,7 @@ namespace CLog
                 m_File.close();
             }
 
-            void log(const LogMessage &message) override
+            void Log(const LogMessage &message) override
             {
                 std::string prefix = Utils::GetPrefixForLevel(message.Level);
 

@@ -6,7 +6,7 @@
 class CustomSink : public CLog::Sinks::BaseSink
 {
 public:
-    void log(const CLog::LogMessage &message) override
+    void Log(const CLog::LogMessage &message) override
     {
         std::string newString = message.Text;
         CLog::Utils::ReplaceAllInString(newString, "{PREFIX}", "");

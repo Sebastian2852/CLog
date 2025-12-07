@@ -19,7 +19,7 @@ namespace CLog
             : m_MinimumLogLevel(minimumLogLevel), m_Format(format)
         {
             m_Thread = std::thread([this]()
-                                   { this->sinkLoop(); });
+                                   { this->SinkLoop(); });
         }
 
         ~Logger()
@@ -72,7 +72,7 @@ namespace CLog
         std::thread m_Thread;
         std::string m_Format;
 
-        void sinkBuffer()
+        void SinkBuffer()
         {
             if (m_MessageBuffer.size() == 0)
                 return;
@@ -80,22 +80,22 @@ namespace CLog
             for (CLog::LogMessage &message : m_MessageBuffer)
             {
                 for (auto &sink : m_Sinks)
-                    sink->log(message);
+                    sink->Log(message);
             }
 
             std::cout << std::endl;
             m_MessageBuffer.clear();
         }
 
-        void sinkLoop()
+        void SinkLoop()
         {
             while (m_Running)
             {
-                sinkBuffer();
+                SinkBuffer();
             }
 
             if (m_MessageBuffer.size() > 0)
-                sinkBuffer();
+                SinkBuffer();
         }
     };
 
