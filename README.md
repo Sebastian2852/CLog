@@ -29,4 +29,4 @@ As well as a log file containing:
 
 This is a header-only library meaning that to use it all you need is the `include` folder and add it to your project (along with adding an include directory that points to it).
 
-CLog is fully extendable so you can add your own sinks that behave in whatever way you like. You can have a look at the built-in sinks [here](https://github.com/Sebastian2852/clog/blob/main/include/CLog/Sink.hpp).
+CLog is fully extendable so you can add your own sinks that behave in whatever way you like. You can have a look at the built-in sinks [here](https://github.com/Sebastian2852/clog/blob/main/include/CLog/Sink.hpp). Furthermore you can look at the [custom sink example](https://github.com/Sebastian2852/clog/blob/main/examples/CustomSink.cpp).

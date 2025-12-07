@@ -1,3 +1,5 @@
+// Basic example which shows off the primary features of CLog
+
 #include <CLog/CLog.hpp>
 
 int main()

@@ -10,7 +10,7 @@ workspace "clog"
         language "C++"
         cppdialect "C++23"
 
-        files {"**.cpp", "**.hpp"}
+        files {"examples/main.cpp"}
         includedirs { "include" }
 
         filter "configurations:Debug"
