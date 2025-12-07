@@ -2,6 +2,7 @@
 *.vcxproj
 *.vcxproj.filters
 *.user
+*.log
 
 bin/
 bin-int/
