@@ -22,39 +22,8 @@ namespace CLog
         public:
             void log(const LogMessage &message) override
             {
-                std::string prefix = "";
-                switch (message.Level)
-                {
-                case LogLevel::Info:
-                    prefix = "INFO";
-                    break;
-                case LogLevel::Debug:
-                    prefix = "DEBUG";
-                    break;
-                case LogLevel::Warn:
-                    prefix = "WARNING";
-                    break;
-                case LogLevel::Error:
-                    prefix = "ERROR";
-                    break;
-                }
-
-                std::string colorCode = "0";
-                switch (message.Level)
-                {
-                case LogLevel::Info:
-                    colorCode = "94";
-                    break;
-                case LogLevel::Debug:
-                    colorCode = "32";
-                    break;
-                case LogLevel::Warn:
-                    colorCode = "93";
-                    break;
-                case LogLevel::Error:
-                    colorCode = "31";
-                    break;
-                }
+                std::string prefix = Utils::GetPrefixForLevel(message.Level);
+                std::string colorCode = Utils::GetColorCodeForLevel(message.Level);
 
                 std::string newString = message.Text;
                 Utils::ReplaceAllInString(newString, "{PREFIX}", prefix);
@@ -79,22 +48,7 @@ namespace CLog
 
             void log(const LogMessage &message) override
             {
-                std::string prefix = "";
-                switch (message.Level)
-                {
-                case LogLevel::Info:
-                    prefix = "INFO";
-                    break;
-                case LogLevel::Debug:
-                    prefix = "DEBUG";
-                    break;
-                case LogLevel::Warn:
-                    prefix = "WARNING";
-                    break;
-                case LogLevel::Error:
-                    prefix = "ERROR";
-                    break;
-                }
+                std::string prefix = Utils::GetPrefixForLevel(message.Level);
 
                 std::string newString = message.Text;
                 Utils::ReplaceAllInString(newString, "{PREFIX}", prefix);

@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include "LogMessage.hpp"
+
 namespace CLog
 {
     namespace Utils
@@ -17,6 +19,38 @@ namespace CLog
                 s.replace(pos, from.length(), to);
                 pos += to.length();
             }
+        }
+
+        inline std::string GetColorCodeForLevel(LogLevel level)
+        {
+            switch (level)
+            {
+            case LogLevel::Info:
+                return "94";
+            case LogLevel::Debug:
+                return "32";
+            case LogLevel::Warn:
+                return "93";
+            case LogLevel::Error:
+                return "31";
+            }
+            return "0";
+        }
+
+        inline std::string GetPrefixForLevel(LogLevel level)
+        {
+            switch (level)
+            {
+            case LogLevel::Info:
+                return "INFO";
+            case LogLevel::Debug:
+                return "DEBUG";
+            case LogLevel::Warn:
+                return "WARNING";
+            case LogLevel::Error:
+                return "ERROR";
+            }
+            return "";
         }
     }
 }
