@@ -3,7 +3,10 @@
 #include <iostream>
 #include <vector>
 #include <thread>
+#include <memory>
+
 #include "Utils.hpp"
+#include "Sink.hpp"
 
 namespace CLog
 {
@@ -56,6 +59,12 @@ namespace CLog
             m_MessageBuffer.emplace_back(CLog::LogMessage(messageToLog, level));
         }
 
+        template <typename T, typename... Args>
+        void AddSink(Args &&...args)
+        {
+            m_Sinks.emplace_back(std::make_shared<T>(std::forward<Args>(args)...));
+        }
+
         void Info(const std::string &message)
         {
             LogMessage(LogLevel::Info, message);
@@ -77,6 +86,7 @@ namespace CLog
         bool m_Running = true;
         LogLevel m_MinimumLogLevel;
         std::vector<CLog::LogMessage> m_MessageBuffer;
+        std::vector<std::shared_ptr<Sinks::BaseSink>> m_Sinks;
         std::thread m_Thread;
         std::string m_Format;
 
@@ -124,7 +134,9 @@ namespace CLog
                 Utils::ReplaceAllInString(message.Text, "{PREFIX}", prefix);
                 Utils::ReplaceAllInString(message.Text, "{COLOR_START}", "\033[" + colorCode + "m");
                 Utils::ReplaceAllInString(message.Text, "{COLOR_END}", "\033[0m");
-                std::cout << message.Text;
+
+                for (auto &sink : m_Sinks)
+                    sink->log(message.Text);
             }
 
             std::cout << std::endl;

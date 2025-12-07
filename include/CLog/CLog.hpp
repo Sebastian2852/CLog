@@ -2,3 +2,4 @@
 // single file to get everything.
 
 #include "Logger.hpp"
+#include "Sink.hpp"

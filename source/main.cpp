@@ -3,7 +3,8 @@
 int main()
 {
     CLog::Logger myLogger("{COLOR_START}[{PREFIX}] {MESSAGE}{COLOR_END}");
-    myLogger.Info("{PREFIX} Hello World!");
+    myLogger.AddSink<CLog::Sinks::ConsoleSink>();
+    myLogger.Info("Hello World!");
     myLogger.Debug("Hello World!");
     myLogger.Warn("Hello World!");
     myLogger.Error("Hello World!");
