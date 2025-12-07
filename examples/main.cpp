@@ -4,7 +4,7 @@
 
 int main()
 {
-    CLog::Logger myLogger("{COLOR_START}[{PREFIX}] {MESSAGE}{COLOR_END}");
+    CLog::Logger myLogger;
     myLogger.AddSink<CLog::Sinks::ConsoleSink>();
     myLogger.AddSink<CLog::Sinks::FileSink>("latest.log");
     myLogger.Info("Hello World!");

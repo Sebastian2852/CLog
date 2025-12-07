@@ -18,7 +18,7 @@ public:
 
 int main()
 {
-    CLog::Logger myLogger("{COLOR_START}[{PREFIX}] {MESSAGE}{COLOR_END}");
+    CLog::Logger myLogger;
     myLogger.AddSink<CustomSink>();
     myLogger.Info("Hello World!");
     myLogger.Debug("Hello World!");

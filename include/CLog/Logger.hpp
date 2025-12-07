@@ -15,7 +15,7 @@ namespace CLog
     class Logger
     {
     public:
-        Logger(std::string format, LogLevel minimumLogLevel = LogLevel::Info)
+        Logger(std::string format = "{COLOR_START}[{PREFIX}] {MESSAGE}{COLOR_END}", LogLevel minimumLogLevel = LogLevel::Info)
             : m_MinimumLogLevel(minimumLogLevel), m_Format(format)
         {
             m_Thread = std::thread([this]()
