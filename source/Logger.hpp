@@ -15,10 +15,11 @@ namespace CLog
 
 	private:
 		std::string GetColorCodeForLevel(LogLevel level);
+		std::string GetPrefixForLevel(LogLevel level);
 
 	private:
 		std::string m_Name;
-		std::string m_LogFormat = "[%{NAME}] %{MSG}";
+		std::string m_LogFormat = "%{COLOR_START}[%{PREFIX}] [%{NAME}] %{MSG}";
 	};
 
 }

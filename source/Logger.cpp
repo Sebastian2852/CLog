@@ -18,8 +18,10 @@ namespace CLog
 	{
 		std::string logMessage = m_LogFormat;
 		Utils::ReplaceInString(logMessage, "%{NAME}", m_Name);
+		Utils::ReplaceInString(logMessage, "%{COLOR_START}", GetColorCodeForLevel(level));
+		Utils::ReplaceInString(logMessage, "%{PREFIX}", GetPrefixForLevel(level));
 		Utils::ReplaceInString(logMessage, "%{MSG}", std::string(str));
-		std::cout << GetColorCodeForLevel(level) << logMessage << "\033[0m\n";
+		std::cout << logMessage << "\033[0m\n";
 	}
 
 	std::string Logger::GetColorCodeForLevel(LogLevel level)
@@ -36,5 +38,23 @@ namespace CLog
 			return "\033[31m";
 		}
 		return "\033[0m";
+	}
+
+	std::string Logger::GetPrefixForLevel(LogLevel level)
+	{
+		switch (level)
+		{
+		case LogLevel::Trace:
+			return "TRACE";
+		case LogLevel::Info:
+			return "INFO";
+		case LogLevel::Debug:
+			return "DEBUG";
+		case LogLevel::Warn:
+			return "WARNING";
+		case LogLevel::Error:
+			return "ERROR";
+		}
+		return "";
 	}
 }
