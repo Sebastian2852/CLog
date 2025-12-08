@@ -1,9 +1,12 @@
 #include "Logger.hpp"
+#include "Utils.hpp"
+
+#include <iostream>
 
 namespace CLog
 {
-
-	Logger::Logger()
+	Logger::Logger(std::string name)
+		: m_Name(name)
 	{
 	}
 
@@ -13,7 +16,10 @@ namespace CLog
 
 	void Logger::Print(LogLevel level, std::string_view str)
 	{
-		std::cout << GetColorCodeForLevel(level) << str << "\033[0m\n";
+		std::string logMessage = m_LogFormat;
+		Utils::ReplaceInString(logMessage, "%{NAME}", m_Name);
+		Utils::ReplaceInString(logMessage, "%{MSG}", std::string(str));
+		std::cout << GetColorCodeForLevel(level) << logMessage << "\033[0m\n";
 	}
 
 	std::string Logger::GetColorCodeForLevel(LogLevel level)

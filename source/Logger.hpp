@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include <iostream>
 #include "LogLevel.hpp"
 
 namespace CLog
@@ -10,12 +9,16 @@ namespace CLog
 	class Logger
 	{
 	public:
-		Logger();
+		Logger(std::string name = "");
 		~Logger();
 		void Print(LogLevel level, std::string_view str);
 
 	private:
 		std::string GetColorCodeForLevel(LogLevel level);
+
+	private:
+		std::string m_Name;
+		std::string m_LogFormat = "[%{NAME}] %{MSG}";
 	};
 
 }

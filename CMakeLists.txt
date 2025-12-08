@@ -12,6 +12,8 @@ add_library(clog
 	source/Logger.hpp
 	source/Logger.cpp
 	source/LogLevel.hpp
+	source/Utils.hpp
+	source/Utils.cpp
 )
 
 include(FetchContent)
