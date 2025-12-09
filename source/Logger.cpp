@@ -5,8 +5,8 @@
 
 namespace CLog
 {
-	Logger::Logger(std::string name)
-		: m_Name(name)
+	Logger::Logger(std::string name = "", std::string format = std::string(DefaultFormat))
+		: m_Name(name), m_LogFormat(format)
 	{
 	}
 

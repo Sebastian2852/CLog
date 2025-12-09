@@ -9,11 +9,12 @@
 
 namespace CLog
 {
+	constexpr std::string_view DefaultFormat = "%{COLOR_START}[%{PREFIX}] [%{NAME}] %{MSG}";
 
 	class Logger
 	{
 	public:
-		Logger(std::string name = "");
+		Logger(std::string name = "", std::string format = std::string(DefaultFormat));
 		~Logger();
 		void Print(LogLevel level, std::string str);
 
@@ -35,7 +36,7 @@ namespace CLog
 
 	private:
 		std::string m_Name;
-		std::string m_LogFormat = "%{COLOR_START}[%{PREFIX}] [%{NAME}] %{MSG}";
+		std::string m_LogFormat;
 		std::vector<std::shared_ptr<Sink::BaseSink>> m_Sinks;
 	};
 
