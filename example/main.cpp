@@ -7,7 +7,7 @@ int main()
 		CLog::Logger myLogger("Basic Logger");
 		myLogger.AddSink<CLog::Sink::ConsoleSink>();
 		myLogger.AddSink<CLog::Sink::FileSink>("BasicLogger.log");
-		myLogger.Trace("Hello World!");
+		myLogger.Trace("We {1} {0}!", "fmt", "support");
 		myLogger.Debug("Hello World!");
 		myLogger.Info("Hello World!");
 		myLogger.Warn("Hello World!");
@@ -19,7 +19,7 @@ int main()
 		CLog::Logger myLogger("Custom Format Logger", "%{NAME} - %{PREFIX}: %{COLOR_START}%{MSG}");
 		myLogger.AddSink<CLog::Sink::ConsoleSink>();
 		myLogger.AddSink<CLog::Sink::FileSink>("CustomFormattedLogger.log");
-		myLogger.Trace("Hello World!");
+		myLogger.Trace("We {1} {0}!", "fmt", "support");
 		myLogger.Debug("Hello World!");
 		myLogger.Info("Hello World!");
 		myLogger.Warn("Hello World!");

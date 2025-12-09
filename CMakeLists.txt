@@ -21,20 +21,16 @@ target_include_directories(clog
 	PUBLIC source
 )
 
-#TODO:
-# Add support for using FMT within logs rather than just accepting a single string
-#####################################################################
-#	include(FetchContent)											#
-#	FetchContent_Declare(											#
-#		FMT															#
-#		GIT_REPOSITORY	https://github.com/fmtlib/fmt				#
-#		GIT_TAG			2a50a0d8081cdc2f591a96648d6fbf0275a6e7c6	#
-#	)																#
-#	FetchContent_MakeAvailable(FMT)									#
-#	target_link_libraries(clog										#
-#		PUBLIC fmt													#
-#	)																#
-#####################################################################
+include(FetchContent)
+FetchContent_Declare(
+	fmt
+	GIT_REPOSITORY	https://github.com/fmtlib/fmt
+	GIT_TAG			2a50a0d8081cdc2f591a96648d6fbf0275a6e7c6
+)
+FetchContent_MakeAvailable(fmt)
+target_link_libraries(clog
+	PUBLIC fmt
+)
 
 if(CLOG_BUILD_EXAMPLE)
 	project(example)
