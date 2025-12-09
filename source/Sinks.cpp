@@ -8,4 +8,19 @@ namespace CLog::Sink
 	{
 		std::cout << str;
 	}
+
+	FileSink::FileSink(const std::string &filename)
+	{
+		m_File = std::ofstream(filename, std::ios::app);
+	}
+
+	FileSink::~FileSink()
+	{
+		m_File.close();
+	}
+
+	void FileSink::print(std::string &str)
+	{
+		m_File << str;
+	};
 }

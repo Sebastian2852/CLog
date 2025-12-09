@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <fstream>
 
 namespace CLog::Sink
 {
@@ -23,4 +24,15 @@ namespace CLog::Sink
 		void print(std::string &str) override;
 	};
 
+	class FileSink : public BaseSink
+	{
+	public:
+		FileSink(const std::string &filename);
+		~FileSink();
+
+		void print(std::string &str) override;
+
+	private:
+		std::ofstream m_File;
+	};
 }
