@@ -17,12 +17,12 @@ namespace CLog
 	void Logger::Print(LogLevel level, std::string str)
 	{
 		std::string logMessage = m_LogFormat;
-		Utils::ReplaceInString(logMessage, "%{NAME}", m_Name);
-		Utils::ReplaceInString(logMessage, "%{MSG}", std::string(str));
 
 		LogMessage msg;
-		msg.message = logMessage;
-		msg.level = level;
+		msg.Format = m_LogFormat;
+		msg.LoggerName = m_Name;
+		msg.Level = level;
+		msg.Message = str;
 
 		for (auto sink : m_Sinks)
 		{

@@ -16,8 +16,10 @@ namespace CLog
 
 	struct LogMessage
 	{
-		std::string message;
-		LogLevel level;
+		std::string LoggerName;
+		std::string Format;
+		std::string Message;
+		LogLevel Level;
 	};
 
 }
